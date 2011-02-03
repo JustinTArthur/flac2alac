@@ -9,7 +9,7 @@ echo ""
 
 if [ "$1" ]
 then
-	ffmpeg  -i "$1" -acodec alac "`basename "$1" .flac`.m4a" \
+	flac -d -c | ffmpeg -i - -acodec alac "`basename "$1" .flac`.m4a" \
 		-metadata title=\""$(metaflac --show-tag=TITLE "$1" | sed 's/TITLE=//g' | sed 's/title=//g')"\" \
 		-metadata author=\""$(metaflac --show-tag=ARTIST "$1" | sed 's/ARTIST=//g' | sed 's/artist=//g')"\" \
 		-metadata album=\""$(metaflac --show-tag=ALBUM "$1" | sed 's/ALBUM=//g' | sed 's/album=//g')"\" \
